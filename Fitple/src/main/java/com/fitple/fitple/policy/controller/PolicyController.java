@@ -68,7 +68,7 @@ public class PolicyController {
         model.addAttribute("keyword", requestDTO.getKeyword());
         model.addAttribute("zipCodeMap", policyService.getZipCodeMap());
 
-        return "/policy/list";
+        return "policy/list";
     }
 
     @GetMapping("/policy/detail")
@@ -103,7 +103,7 @@ public class PolicyController {
         }
         model.addAttribute("isScrapped", isScrapped);
 
-        return "/policy/detail";
+        return "policy/detail";
     }
 
 }

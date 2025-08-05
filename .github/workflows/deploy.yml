@@ -29,10 +29,9 @@ jobs:
           format: YYYY-MM-DD_HHmmss
           utcOffset: "+09:00"
 
-      - name: Zip deployment package
-        run: |
-          cd Fitple
-          zip -r ../deploy.zip .
+      - name: Set artifact
+        working-directory: Fitple
+        run: echo "artifact=$(basename $(ls ./build/libs/*.jar | grep -v plain))" >> $GITHUB_ENV
 
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v20
@@ -43,4 +42,4 @@ jobs:
           environment_name: springboot-developer-env-1
           version_label: fitple-${{ steps.current-time.outputs.formattedTime }}
           region: ap-northeast-2
-          deployment_package: deploy.zip
+          deployment_package: Fitple/build/libs/${{ env.artifact }}

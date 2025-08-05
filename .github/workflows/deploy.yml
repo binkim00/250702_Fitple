@@ -39,7 +39,7 @@ jobs:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: springboot-developer
-          environment_name: springboot-developer-env
+          environment_name: springboot-developer-env-1
           version_label: fitple-${{ steps.current-time.outputs.formattedTime }}
           region: ap-northeast-2
           deployment_package: Fitple/build/libs/${{ env.artifact }}

@@ -2,7 +2,7 @@ name: Deploy Fitple
 
 on:
   push:
-    branches: [ main ]  # ← 니가 사용하는 브랜치명에 따라 수정
+    branches: [ main ]
 
 jobs:
   build:
@@ -17,6 +17,7 @@ jobs:
           java-version: '17'
 
       - name: Build Fitple
+        working-directory: Fitple
         run: |
           chmod +x gradlew
           ./gradlew clean build -x test
@@ -25,10 +26,11 @@ jobs:
         uses: josStorer/get-current-time@v2.0.2
         id: current-time
         with:
-          format: YYYY-MM-DD_HHmmss  # 언더바로 돼 있어야 함
+          format: YYYY-MM-DD_HHmmss
           utcOffset: "+09:00"
 
       - name: Set artifact
+        working-directory: Fitple
         run: echo "artifact=$(basename $(ls ./build/libs/*.jar | grep -v plain))" >> $GITHUB_ENV
 
       - name: Deploy to EB
@@ -36,8 +38,8 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: springboot-developer            # 기존 앱 이름 그대로!
-          environment_name: springboot-developer-env        # 환경도 그대로!
+          application_name: springboot-developer
+          environment_name: springboot-developer-env
           version_label: fitple-${{ steps.current-time.outputs.formattedTime }}
           region: ap-northeast-2
-          deployment_package: build/libs/${{ env.artifact }}
+          deployment_package: Fitple/build/libs/${{ env.artifact }}

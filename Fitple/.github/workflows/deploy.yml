@@ -2,7 +2,7 @@ name: Deploy Fitple
 
 on:
   push:
-    branches: [ policyadd ]  # ← 니가 사용하는 브랜치명에 따라 수정
+    branches: [ main ]  # ← 니가 사용하는 브랜치명에 따라 수정
 
 jobs:
   build:

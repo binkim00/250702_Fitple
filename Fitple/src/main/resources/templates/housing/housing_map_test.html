@@ -130,7 +130,7 @@
 </main>
 <div th:replace="fragments/footer :: footer"></div>
 <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a0e30d98f6dfa0bc355f0bdba19e03da&libraries=services"></script>
+<script th:src="@{'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${kakaoKey} + '&libraries=services'}"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script th:src="@{/js/housing.js}"></script>

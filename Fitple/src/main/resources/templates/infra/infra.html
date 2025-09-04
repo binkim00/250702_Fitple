@@ -94,7 +94,7 @@
 </main>
 <div th:replace="fragments/footer :: footer"></div>
 <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b8731ae4d4303ec9f32c926ed947ae8d&libraries=services"></script>
+<script th:src="@{'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${kakaoKey} + '&libraries=services'}"></script>
 <script src="/js/infraJS.js"></script>
 <!-- Vendor JS Files -->
 <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

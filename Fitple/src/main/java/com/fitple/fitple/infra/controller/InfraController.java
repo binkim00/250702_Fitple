@@ -14,6 +14,6 @@ public class InfraController {
     @GetMapping("/infra")
     public String infra(Model model) {
         model.addAttribute("kakaoKey", kakaoJsKey);
-        return "infra"; // templates/infra.html
+        return "infra/infra"; // templates/infra.html
     }
 }

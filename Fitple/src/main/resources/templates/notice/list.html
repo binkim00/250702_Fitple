@@ -73,7 +73,7 @@
     </td>
   </tr>
   <tr th:if="${responseDTO != null}" th:each="notice, stat : ${responseDTO.dtoList}">
-    <td th:text="${notice.id}">1</td>
+    <td th:text="${notice.noticeNo}">1</td>
     <td>
       <a th:href="@{/notice/{id}/read(id=${notice.id})}" th:text="${notice.title}">공지 제목</a>
     </td>

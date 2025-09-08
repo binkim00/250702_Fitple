@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 @RequiredArgsConstructor
@@ -22,8 +23,17 @@ public class NoticeService {
 
 
     public PageResponseDTO<NoticeDTO> getNoticeList(PageRequestDTO pageRequestDTO){
-        return noticeRepository.searchList(pageRequestDTO);
+        PageResponseDTO<NoticeDTO> response = noticeRepository.searchList(pageRequestDTO);
+
+        long totalCount = response.getTotal();
+        int startNo = (int) (totalCount - pageRequestDTO.getSkip());
+
+        AtomicInteger counter = new AtomicInteger(startNo);
+        response.getDtoList().forEach(dto -> dto.setNoticeNo(counter.getAndDecrement()));
+
+        return response;
     }
+
 
     @Transactional
     public void addViewCount(Long id){

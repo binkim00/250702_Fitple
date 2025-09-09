@@ -24,19 +24,24 @@ public class InfraAPIController {
 
     // 시/도 목록 가져오기 API
     @GetMapping("/sido")
-    public ResponseEntity<String> getSidoList() {
-        String url = "https://api.vworld.kr/req/data?service=data" +
-                "&request=GetFeature" +
-                "&data=LT_C_ADSIDO_INFO" +
-                "&key=" + apiKey +
-                "&domain=" + apiDomain +
-                "&type=json" +
-                "&numOfRows=30" +
-                "&size=30" +
-                "&geomFilter=BOX(115,33,135,43)";
+    public ResponseEntity<?> getSidoList() {
+        try {
+            String url = "https://api.vworld.kr/req/data?service=data" +
+                    "&request=GetFeature" +
+                    "&data=LT_C_ADSIDO_INFO" +
+                    "&key=" + apiKey +
+                    "&domain=" + apiDomain +
+                    "&type=json" +
+                    "&numOfRows=30" +
+                    "&size=30" +
+                    "&geomFilter=BOX(115,33,135,43)";
 
-        String response = restTemplate.getForObject(url, String.class);
-        return ResponseEntity.ok(response);
+            String response = restTemplate.getForObject(url, String.class);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            // 에러 메시지를 그대로 확인 가능
+            return ResponseEntity.status(500).body("Vworld API 호출 실패: " + e.getMessage());
+        }
     }
 
     // 시/군/구 목록 가져오기 API

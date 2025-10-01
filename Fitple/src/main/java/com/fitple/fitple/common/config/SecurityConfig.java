@@ -48,6 +48,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // CSRF 비활성화 (개발용)
 
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/", "/healthz").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN") // /admin 경로는 ADMIN만 접근 가능
                         .anyRequest().permitAll() // 그 외 모든 요청은 허용
                 )
